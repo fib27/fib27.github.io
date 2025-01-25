@@ -3,121 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>730 - A Secret for You</title>
+    <title>Virtual Jar of Hearts</title>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion/dist/framer-motion.min.js"></script>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffefe0;
-            color: #4b2e26;
-            line-height: 1.6;
+            font-family: Arial, sans-serif;
             text-align: center;
-        }
-        header {
-            background-color: #ffcf99;
-            color: #4b2e26;
-            padding: 20px 0;
-        }
-        header h1 {
+            background-color: #f8f9fa;
             margin: 0;
-        }
-        section {
-            padding: 20px;
-        }
-        .timeline {
-            margin: 20px auto;
-            max-width: 800px;
-            text-align: left;
-        }
-        .timeline h2 {
-            color: #4b2e26;
-        }
-        .timeline ul {
-            list-style: none;
             padding: 0;
         }
-        .timeline ul li {
-            margin: 15px 0;
-            padding: 15px;
-            background: #fff6e5;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+        h1 {
+            margin-top: 20px;
+            color: #ff6b6b;
         }
-       <style>
-.gallery {
-        display: flex;
-        gap: 15px;
-        margin: 20px auto;
-        padding: 10px;
-        max-width: 90%; /* Keeps the gallery width responsive */
-        overflow: hidden; /* Ensures no horizontal scroll bar */
-        height: 300px; /* Height of the gallery to make images partially visible */
-        position: relative;
-    }
 
-    /* Gallery animation */
-    .gallery-wrapper {
-        display: flex;
-        animation: pan 10s linear infinite;
-    }
-
-    .gallery img {
-        flex-shrink: 0;
-        height: 100%; /* Make the images fill the height of the gallery */
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        margin-right: 15px; /* Spacing between images */
-    }
-
-    /* Animation for the panning effect */
-    @keyframes pan {
-        0% {
-            transform: translateX(0%);
+        #image-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            z-index: 10;
+            padding: 10px 0;
         }
-        100% {
-            transform: translateX(-100%);
+
+        #image-container img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
-    }
 
-    /* For spacing the rest of the page content */
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 150vh; /* Makes the page scrollable */
-    }
+        #jar {
+            width: 200px;
+            height: 300px;
+            border: 5px solid #ff6b6b;
+            border-radius: 10px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to top, #ffe6e6, #fff);
+        }
 
-    footer {
-        background: #ffcf99;
-        color: #4b2e26;
-        padding: 10px 0;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-    }
-</style>
+        .heart {
+            width: 30px;
+            height: 30px;
+            background-color: #ff6b6b;
+            position: absolute;
+            border-radius: 50%;
+            animation: floatUp 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
 
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #ff4c4c;
+        }
+
+        #message {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Scroll Effects */
+        body {
+            height: 200vh; /* For scrolling effects */
+        }
+
+        body:hover #image-container img {
+            transform: translateX(calc(var(--scroll-offset, 0px) * 1));
+        }
+
+    </style>
+</head>
 <body>
-    <header>
-        <h1>Hey babe</h1>
-        <p>You've discovered the secret part of your gift</p>
-    </header>
+    <h1>My Jar of Hearts for You</h1>
 
-      <div class="gallery">
-    <div class="gallery-wrapper">
+    <div id="image-container">
         <img src="IMG_9983.jpg" alt="Picture 1">
         <img src="IMG_1698.jpeg" alt="Picture 2">
         <img src="CIMG7888.jpeg" alt="Picture 3">
         <img src="IMG_0123.jpg" alt="Picture 4">
         <img src="IMG_2530.jpg" alt="Picture 5">
     </div>
-</div>
-     
 
-    <footer>
-        <p>With love, Francis ❤️</p>
-    </footer>
+    <div id="jar"></div>
+    <button onclick="addHeart()">Add a Heart</button>
+    <div id="message">Thank you for filling the jar with love!</div>
+
+    <script>
+        let heartCount = 0;
+
+        function addHeart() {
+            const jar = document.getElementById('jar');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            
+            const message = "message here"; // Write your message here
+            heart.innerHTML = message;
+
+            const x = Math.random() * 160 + 20; // Random horizontal position
+            const duration = Math.random() * 2 + 2; // Random float speed
+
+            heart.style.left = `${x}px`;
+            heart.style.animationDuration = `${duration}s`;
+            
+            jar.appendChild(heart);
+
+            // Remove heart after animation
+            setTimeout(() => {
+                jar.removeChild(heart);
+            }, duration * 1000);
+
+            heartCount++;
+            if (heartCount === 20) {
+                document.getElementById('message').style.display = 'block';
+            }
+        }
+
+        // Scroll Event Listener for Image Panning
+        window.addEventListener('scroll', () => {
+            const images = document.querySelectorAll('#image-container img');
+            const scrollOffset = window.scrollY / 20; // Adjust speed
+            images.forEach((img, index) => {
+                img.style.transform = `translateX(${index % 2 === 0 ? -scrollOffset : scrollOffset}px)`;
+            });
+        });
+    </script>
 </body>
 </html>
