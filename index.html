@@ -22,156 +22,112 @@
         h1 {
             margin: 0;
             font-size: 24px;
-        }
+            
+<style>
+    /* Carousel container */
+    .carousel {
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
 
-        #image-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            height: 200px;
-            margin: 20px 0;
-        }
+    /* Wrapper for images */
+    .carousel-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
 
-        #image-container img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            position: absolute;
-            animation: moveLeft 10s linear infinite;
-        }
+    /* Individual image styles */
+    .carousel img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
 
-        #jar {
-            width: 300px;
-            height: 400px;
-            border: 5px solid #ff6b6b;
-            border-radius: 10px;
-            margin: 20px auto;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(to bottom, #ffe6e6, #fff);
-        }
+    /* Arrow buttons */
+    .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 30px;
+        padding: 10px;
+        cursor: pointer;
+    }
 
-        .heart {
-    width: 40px;
-    height: 40px;
-    background-color: #ff6b6b;
-    position: absolute;
-    clip-path: polygon(
-        50% 0%, 
-        61% 5%, 
-        71% 16%, 
-        79% 30%, 
-        79% 45%, 
-        68% 65%, 
-        50% 85%, 
-        32% 65%, 
-        21% 45%, 
-        21% 30%, 
-        29% 16%, 
-        39% 5%
-    );
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: floatDown 5s linear forwards;
-}
+    .left-arrow {
+        left: 10px;
+    }
 
-        button {
-            padding: 10px 20px;
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+    .right-arrow {
+        right: 10px;
+    }
+</style>
 
-        button:hover {
-            background-color: #ff4c4c;
-        }
-
-        #message {
-            font-size: 18px;
-            color: #333;
-            margin-top: 10px;
-            display: none;
-        }
-
-        @keyframes moveLeft {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-200%);
-            }
-        }
-
-        @keyframes floatDown {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100%);
-            }
-        }
-
-        footer {
-            font-size: 16px;
-        }
-    </style>
-</head>
 <body>
+    <div class="carousel">
+        <div class="carousel-wrapper">
+            <img src="IMG_9983.jpg" alt="Image 1">
+            <img src="IMG_1698.jpeg" alt="Image 2">
+            <img src="CIMG7888.jpeg" alt="Image 3">
+            <img src="IMG_0123.jpg" alt="Image 4">
+            <img src="IMG_2530.jpg" alt="Image 5">
+        </div>
+        <div class="arrow left-arrow">&#10094;</div>
+        <div class="arrow right-arrow">&#10095;</div>
+    </div>
+
+    <script>
+        const prevButton = document.querySelector('.left-arrow');
+        const nextButton = document.querySelector('.right-arrow');
+        const carouselWrapper = document.querySelector('.carousel-wrapper');
+        const images = document.querySelectorAll('.carousel img');
+        let currentIndex = 0;
+
+        // Function to update the position of the carousel
+        function updateCarousel() {
+            carouselWrapper.style.transform = `translateX(${-100 * currentIndex}%)`;
+        }
+
+        // Show next image
+        nextButton.addEventListener('click', () => {
+            currentIndex++;
+            if (currentIndex >= images.length) {
+                currentIndex = 0; // Loop back to the first image
+            }
+            updateCarousel();
+        });
+
+        // Show previous image
+        prevButton.addEventListener('click', () => {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1; // Loop back to the last image
+            }
+            updateCarousel();
+        });
+
+        // Auto slide every 3 seconds
+        setInterval(() => {
+            currentIndex++;
+            if (currentIndex >= images.length) {
+                currentIndex = 0; // Loop back to the first image
+            }
+            updateCarousel();
+        }, 3000); // Change image every 3 seconds
+    </script>
+</body>
+
     <header>
         <h1>Hey babe,<br>a secret website just for you <3</h1>
     </header>
-
-    <div id="image-container">
-        <img src="IMG_9983.jpg" alt="Picture 1" style="animation-delay: 0s;">
-        <img src="IMG_1698.jpeg" alt="Picture 2" style="animation-delay: 2s;">
-        <img src="CIMG7888.jpeg" alt="Picture 3" style="animation-delay: 4s;">
-        <img src="IMG_0123.jpg" alt="Picture 4" style="animation-delay: 6s;">
-        <img src="IMG_2530.jpg" alt="Picture 5" style="animation-delay: 8s;">
-    </div>
-
-    <div id="jar"></div>
-    <button onclick="addHeart()">Add a Heart</button>
-    <div id="message">Thank you for filling the jar with love!</div>
 
     <footer>
         Made with love by Francis ❤️
     </footer>
 
-    <script>
-        let heartCount = 0;
-
-        function addHeart() {
-            const jar = document.getElementById('jar');
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-
-            const message = "message here"; // Write your message here
-            heart.innerHTML = message;
-
-            const x = Math.random() * 220 + 40; // Random horizontal position within jar
-    const y = 380 - (heartCount * 20); // Stack hearts vertically, starting from the bottom
-
-    heart.style.left = `${x}px`;
-    heart.style.top = `${y}px`;
-
-    jar.appendChild(heart);
-
-    heartCount++;
-    if (y <= 20) {
-        document.getElementById('message').style.display = 'block';
-    }
-}
-    </script>
 </body>
 </html>
