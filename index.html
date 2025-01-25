@@ -37,7 +37,7 @@
         .carousel {
             position: relative;
             width: 100%;
-            height: 100vh; /* 40% of the viewport height */
+            height: 60vh; /* 40% of the viewport height */
             max-width: 100%;
             margin: 0 auto;
             overflow: hidden;
@@ -46,13 +46,13 @@
         /* Wrapper for images */
         .carousel-wrapper {
             display: flex;
-            transition: transform 2s ease-in-out;
+            transition: transform 0.5s ease-in-out;
         }
 
         /* Individual image styles */
         .carousel img {
             width: 30%;
-            height: 100%; /* Make images fill the height of the carousel */
+            height: 60vh; /* Make images fill the height of the carousel */
             object-fit: contain; /* Makes sure images fill the container */
         }
 
@@ -136,7 +136,7 @@
                 currentIndex = 0; // Loop back to the first image
             }
             updateCarousel();
-        }, 3000); // Change image every 3 seconds
+        }, 5000); // Change image every 3 seconds
     </script>
 </body>
 </html>
