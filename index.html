@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Jar of Hearts</title>
-    <script src="https://cdn.jsdelivr.net/npm/framer-motion/dist/framer-motion.min.js"></script>
+    <title>Secret Website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f8f9fa;
             margin: 0;
             padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        header, footer {
+            background-color: #ff6b6b;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
         }
 
         h1 {
-            margin-top: 20px;
-            color: #ff6b6b;
+            margin: 0;
+            font-size: 24px;
         }
 
         #image-container {
@@ -24,55 +29,44 @@
             justify-content: center;
             gap: 10px;
             overflow: hidden;
-            position: sticky;
-            top: 0;
-            background-color: #fff;
-            z-index: 10;
-            padding: 10px 0;
+            position: relative;
+            width: 100%;
+            height: 200px;
+            margin: 20px 0;
         }
 
         #image-container img {
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            position: absolute;
+            animation: moveLeft 10s linear infinite;
         }
 
         #jar {
-            width: 200px;
-            height: 300px;
+            width: 300px;
+            height: 400px;
             border: 5px solid #ff6b6b;
             border-radius: 10px;
             margin: 20px auto;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(to top, #ffe6e6, #fff);
+            background: linear-gradient(to bottom, #ffe6e6, #fff);
         }
 
         .heart {
             width: 30px;
             height: 30px;
             background-color: #ff6b6b;
-            position: absolute;
             border-radius: 50%;
-            animation: floatUp 3s ease-in-out infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: absolute;
             color: white;
             font-size: 12px;
             font-weight: bold;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100%);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: floatDown 5s linear forwards;
         }
 
         button {
@@ -97,31 +91,49 @@
             display: none;
         }
 
-        /* Scroll Effects */
-        body {
-            height: 200vh; /* For scrolling effects */
+        @keyframes moveLeft {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
-        body:hover #image-container img {
-            transform: translateX(calc(var(--scroll-offset, 0px) * 1));
+        @keyframes floatDown {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100%);
+            }
         }
 
+        footer {
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
-    <h1>My Jar of Hearts for You</h1>
+    <header>
+        <h1>Hey babe,<br>a secret website just for you <3</h1>
+    </header>
 
     <div id="image-container">
-        <img src="IMG_9983.jpg" alt="Picture 1">
-        <img src="IMG_1698.jpeg" alt="Picture 2">
-        <img src="CIMG7888.jpeg" alt="Picture 3">
-        <img src="IMG_0123.jpg" alt="Picture 4">
-        <img src="IMG_2530.jpg" alt="Picture 5">
+        <img src="IMG_9983.jpg" alt="Picture 1" style="animation-delay: 0s;">
+        <img src="IMG_1698.jpeg" alt="Picture 2" style="animation-delay: 2s;">
+        <img src="CIMG7888.jpeg" alt="Picture 3" style="animation-delay: 4s;">
+        <img src="IMG_0123.jpg" alt="Picture 4" style="animation-delay: 6s;">
+        <img src="IMG_2530.jpg" alt="Picture 5" style="animation-delay: 8s;">
     </div>
 
     <div id="jar"></div>
     <button onclick="addHeart()">Add a Heart</button>
     <div id="message">Thank you for filling the jar with love!</div>
+
+    <footer>
+        Made with love by Francis ❤️
+    </footer>
 
     <script>
         let heartCount = 0;
@@ -130,37 +142,21 @@
             const jar = document.getElementById('jar');
             const heart = document.createElement('div');
             heart.className = 'heart';
-            
+
             const message = "message here"; // Write your message here
             heart.innerHTML = message;
 
-            const x = Math.random() * 160 + 20; // Random horizontal position
-            const duration = Math.random() * 2 + 2; // Random float speed
-
+            const x = Math.random() * 240 + 30; // Random horizontal position within jar
             heart.style.left = `${x}px`;
-            heart.style.animationDuration = `${duration}s`;
-            
+            heart.style.top = `${400 - (heartCount * 20)}px`; // Stack hearts vertically
+
             jar.appendChild(heart);
 
-            // Remove heart after animation
-            setTimeout(() => {
-                jar.removeChild(heart);
-            }, duration * 1000);
-
             heartCount++;
-            if (heartCount === 20) {
+            if (heartCount * 20 >= 400) {
                 document.getElementById('message').style.display = 'block';
             }
         }
-
-        // Scroll Event Listener for Image Panning
-        window.addEventListener('scroll', () => {
-            const images = document.querySelectorAll('#image-container img');
-            const scrollOffset = window.scrollY / 20; // Adjust speed
-            images.forEach((img, index) => {
-                img.style.transform = `translateX(${index % 2 === 0 ? -scrollOffset : scrollOffset}px)`;
-            });
-        });
     </script>
 </body>
 </html>
