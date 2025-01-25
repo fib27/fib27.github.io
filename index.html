@@ -36,8 +36,8 @@
         }
 
         #image-container img {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             object-fit: cover;
             position: absolute;
             animation: moveLeft 10s linear infinite;
@@ -55,19 +55,32 @@
         }
 
         .heart {
-            width: 30px;
-            height: 30px;
-            background-color: #ff6b6b;
-            border-radius: 50%;
-            position: absolute;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: floatDown 5s linear forwards;
-        }
+    width: 40px;
+    height: 40px;
+    background-color: #ff6b6b;
+    position: absolute;
+    clip-path: polygon(
+        50% 0%, 
+        61% 5%, 
+        71% 16%, 
+        79% 30%, 
+        79% 45%, 
+        68% 65%, 
+        50% 85%, 
+        32% 65%, 
+        21% 45%, 
+        21% 30%, 
+        29% 16%, 
+        39% 5%
+    );
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: floatDown 5s linear forwards;
+}
 
         button {
             padding: 10px 20px;
@@ -96,7 +109,7 @@
                 transform: translateX(100%);
             }
             100% {
-                transform: translateX(-100%);
+                transform: translateX(-200%);
             }
         }
 
@@ -146,17 +159,19 @@
             const message = "message here"; // Write your message here
             heart.innerHTML = message;
 
-            const x = Math.random() * 240 + 30; // Random horizontal position within jar
-            heart.style.left = `${x}px`;
-            heart.style.top = `${400 - (heartCount * 20)}px`; // Stack hearts vertically
+            const x = Math.random() * 220 + 40; // Random horizontal position within jar
+    const y = 380 - (heartCount * 20); // Stack hearts vertically, starting from the bottom
 
-            jar.appendChild(heart);
+    heart.style.left = `${x}px`;
+    heart.style.top = `${y}px`;
 
-            heartCount++;
-            if (heartCount * 20 >= 400) {
-                document.getElementById('message').style.display = 'block';
-            }
-        }
+    jar.appendChild(heart);
+
+    heartCount++;
+    if (y <= 20) {
+        document.getElementById('message').style.display = 'block';
+    }
+}
     </script>
 </body>
 </html>
