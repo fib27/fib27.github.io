@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0730 - A Secret for You</title>
+    <title>730 - A Secret for You</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #fdf6f0;
-            color: #333;
+            background-color: #ffefe0;
+            color: #4b2e26;
             line-height: 1.6;
             text-align: center;
         }
         header {
-            background-color: #ffe0b5;
-            color: #5a3d2b;
+            background-color: #ffcf99;
+            color: #4b2e26;
             padding: 20px 0;
         }
         header h1 {
@@ -31,7 +31,7 @@
             text-align: left;
         }
         .timeline h2 {
-            color: #5a3d2b;
+            color: #4b2e26;
         }
         .timeline ul {
             list-style: none;
@@ -40,7 +40,21 @@
         .timeline ul li {
             margin: 15px 0;
             padding: 15px;
-            background: #fff;
+            background: #fff6e5;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .gallery {
+            display: flex;
+            overflow-x: scroll;
+            gap: 15px;
+            margin: 20px auto;
+            padding: 10px;
+            max-width: 90%;
+        }
+        .gallery img {
+            flex-shrink: 0;
+            height: 200px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -51,13 +65,13 @@
         .clue {
             padding: 15px;
             margin: 10px 0;
-            background: #fff;
+            background: #fff6e5;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         footer {
-            background: #ffe0b5;
-            color: #5a3d2b;
+            background: #ffcf99;
+            color: #4b2e26;
             padding: 10px 0;
             position: fixed;
             bottom: 0;
@@ -79,6 +93,12 @@
                 <li><strong>First Adventure:</strong> Remember when we got lost but laughed the whole way?</li>
                 <li><strong>Two Years Together:</strong> Here's to all our memories and the ones yet to come.</li>
             </ul>
+        </div>
+
+        <div class="gallery">
+            <img src="path-to-image1.jpg" alt="Picture 1">
+            <img src="path-to-image2.jpg" alt="Picture 2">
+            <img src="path-to-image3.jpg" alt="Picture 3">
         </div>
 
         <div class="treasure-hunt">
