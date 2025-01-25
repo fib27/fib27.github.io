@@ -105,7 +105,7 @@
         const carouselWrapper = document.querySelector('.carousel-wrapper');
         const images = document.querySelectorAll('.carousel img');
         let currentIndex = 0;
-
+        let images.length = 1;
         // Function to update the position of the carousel
         function updateCarousel() {
             carouselWrapper.style.transform = `translateX(${-100 * currentIndex}%)`;
@@ -114,7 +114,7 @@
         // Show next image
         nextButton.addEventListener('click', () => {
             currentIndex++;
-            if (currentIndex >= images.length) {
+            if (currentIndex > images.length) {
                 currentIndex = 0; // Loop back to the first image
             }
             updateCarousel();
