@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Website</title>
+    <title>Continuous Scrolling Carousel</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,31 +33,32 @@
             font-size: 16px;
         }
 
-        /* Carousel container */
         .carousel {
             position: relative;
             width: 100%;
             height: 60vh;
-            max-width: 100%;
-            margin: 0 auto;
             overflow: hidden;
         }
 
-        /* Wrapper for images */
         .carousel-wrapper {
             display: flex;
-            transition: transform 0.5s ease-in-out;
+            animation: scroll 15s linear infinite;
         }
 
-        /* Individual image styles */
         .carousel img {
-            width: 100%;
+            width: 100vw; /* Ensure each image takes up the full viewport width */
             height: 60vh;
             object-fit: cover;
         }
 
-       
-
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
     </style>
 </head>
 <body>
@@ -67,7 +68,6 @@
 
     <div class="carousel">
         <div class="carousel-wrapper">
-            <img src="4.jpg" alt="Last Image"> <!-- Duplicate last image -->
             <img src="IMG_9983.jpg" alt="Image 1">
             <img src="IMG_1698.jpeg" alt="Image 2">
             <img src="CIMG7888.jpeg" alt="Image 3">
@@ -77,69 +77,15 @@
             <img src="2.jpg" alt="Image 7">
             <img src="3.jpg" alt="Image 8">
             <img src="4.jpg" alt="Image 9">
-            <img src="IMG_9983.jpg" alt="First Image"> <!-- Duplicate first image -->
+            <!-- Duplicate images for seamless scrolling -->
+            <img src="IMG_9983.jpg" alt="Image 1">
+            <img src="IMG_1698.jpeg" alt="Image 2">
+            <img src="CIMG7888.jpeg" alt="Image 3">
         </div>
-        <div class="arrow left-arrow">&#10094;</div>
-        <div class="arrow right-arrow">&#10095;</div>
     </div>
 
     <footer>
         Made with love by Francis ❤️
     </footer>
-
-    <script>
-        const prevButton = document.querySelector('.left-arrow');
-        const nextButton = document.querySelector('.right-arrow');
-        const carouselWrapper = document.querySelector('.carousel-wrapper');
-        const images = document.querySelectorAll('.carousel img');
-
-        let currentIndex = 1; // Start at the first actual image (index 1)
-        const totalImages = images.length;
-
-        // Set the initial position
-        carouselWrapper.style.transform = `translateX(${-currentIndex * 100}%)`;
-
-        // Function to update the position of the carousel
-        function updateCarousel() {
-            carouselWrapper.style.transition = "transform 0.5s ease-in-out";
-            carouselWrapper.style.transform = `translateX(${-currentIndex * 100}%)`;
-        }
-
-        // Reset position instantly (for seamless looping)
-        function resetPosition() {
-            carouselWrapper.style.transition = "none"; // Disable transition
-            carouselWrapper.style.transform = `translateX(${-currentIndex * 100}%)`;
-        }
-
-        // Show next image
-        nextButton.addEventListener('click', () => {
-            currentIndex++;
-            updateCarousel();
-            if (currentIndex === totalImages - 1) {
-                setTimeout(() => {
-                    currentIndex = 1; // Reset to first actual image
-                    resetPosition();
-                }, 500); // Wait for the transition to complete
-            }
-        });
-
-        // Show previous image
-        prevButton.addEventListener('click', () => {
-            currentIndex--;
-            updateCarousel();
-            if (currentIndex === 0) {
-                setTimeout(() => {
-                    currentIndex = totalImages - 2; // Reset to last actual image
-                    resetPosition();
-                }, 500); // Wait for the transition to complete
-            }
-        });
-
-        // Auto slide every 5 seconds
-        setInterval(() => {
-            nextButton.click(); // Trigger the next button click
-        }, 5000);
-    </script>
 </body>
 </html>
-
