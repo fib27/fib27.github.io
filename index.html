@@ -23,6 +23,18 @@
             font-size: 24px;
         }
 
+        header h1::before {
+            content: "Hey babe, "; /* Adds the desired text before the rest */
+            font-size: 36px;       /* Larger font size for "Hey babe" */
+            font-family: 'Georgia', serif; /* Different font for "Hey babe" */
+            color: #ffe066;        /* Custom color for "Hey babe" */
+        }
+
+header h1 {
+    font-size: 24px; /* General font size for the rest of the sentence */
+    color: white;    /* General text color */
+}
+
         footer {
             background-color: #ff6b6b;
             color: white;
@@ -61,11 +73,11 @@
 
         .additional-content {
             padding: 20px;
-            background-color: #fff;
+            background-color: #f8f9fa;
             color: #333;
             font-size: 18px;
             text-align: center;
-            margin-top: 30px; /* Controls space from the carousel */
+            margin-top: 50px; /* Controls space from the carousel */
         }
 
         @keyframes scroll {
@@ -80,7 +92,7 @@
 </head>
 <body>
     <header>
-        <h1>Hey babe,<br>a secret website just for you <3</h1>
+        <h1><br>a secret website just for you <3</h1>
     </header>
 
     
