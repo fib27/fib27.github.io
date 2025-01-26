@@ -90,6 +90,10 @@
             <img src="CIMG7888.jpeg" alt="Image 3">
             <img src="IMG_0123.jpg" alt="Image 4">
             <img src="IMG_2530.jpg" alt="Image 5">
+            <img src="1.jpg" alt="Image 6">
+            <img src="2.jpg" alt="Image 7">
+            <img src="3.jpg" alt="Image 8">
+            <img src="4.jpg" alt="Image 9">
         </div>
         <div class="arrow left-arrow">&#10094;</div>
         <div class="arrow right-arrow">&#10095;</div>
@@ -104,8 +108,11 @@
         const nextButton = document.querySelector('.right-arrow');
         const carouselWrapper = document.querySelector('.carousel-wrapper');
         const images = document.querySelectorAll('.carousel img');
+
+        let currentIndex = 0; // Track the current index
+        const totalImages = images.length; // Total number of images
+
         
-       let images.length = 1;
         // Function to update the position of the carousel
         function updateCarousel() {
             carouselWrapper.style.transform = `translateX(${-100 * currentIndex}%)`;
