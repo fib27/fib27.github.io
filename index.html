@@ -112,38 +112,28 @@
         let currentIndex = 0; // Track the current index
         const totalImages = images.length; // Total number of images
 
-        
-        // Function to update the position of the carousel
+             // Function to update the position of the carousel
         function updateCarousel() {
-            carouselWrapper.style.transform = `translateX(${-100 * currentIndex}%)`;
+            carouselWrapper.style.transform = `translateX(${-currentIndex * 100}%)`;
         }
 
         // Show next image
         nextButton.addEventListener('click', () => {
-            currentIndex++;
-            if (currentIndex > images.length) {
-                currentIndex = 0; // Loop back to the first image
-            }
+            currentIndex = (currentIndex + 1) % totalImages; // Loop back to the first image
             updateCarousel();
         });
 
         // Show previous image
         prevButton.addEventListener('click', () => {
-            currentIndex--;
-            if (currentIndex < 0) {
-                currentIndex = images.length - 1; // Loop back to the last image
-            }
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages; // Loop back to the last image
             updateCarousel();
         });
 
-        // Auto slide every 3 seconds
+        // Auto slide every 5 seconds
         setInterval(() => {
-            currentIndex++;
-            if (currentIndex >= images.length) {
-                currentIndex = 0; // Loop back to the first image
-            }
+            currentIndex = (currentIndex + 1) % totalImages; // Loop back to the first image
             updateCarousel();
-        }, 5000); // Change image every 3 seconds
+        }, 5000); // Change image every 5 seconds
     </script>
 </body>
 </html>
